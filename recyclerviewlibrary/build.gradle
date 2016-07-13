@@ -1,0 +1,22 @@
+apply plugin: 'com.android.library'
+
+android {
+  /*  compileSdkVersion 22
+    buildToolsVersion "22.0.1"*/
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+//    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:recyclerview-v7:24.0.0'
+    // recyclerview 分割线
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+}

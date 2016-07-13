@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WChatListActivity"
+            android:name=".activities.WChatListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".WChatGridActivity"
+            android:name=".activities.WChatGridActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WChatHeaderAndFooterActivity"
             android:screenOrientation="portrait" />
     </application>
 

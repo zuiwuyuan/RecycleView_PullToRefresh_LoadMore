@@ -192,6 +192,7 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     public int getItemViewType(int position) {
         int innerCount = mInnerAdapter.getItemCount();
         int headerViewsCountCount = getHeaderViewsCount();
+
         if (position < headerViewsCountCount) {
             return TYPE_HEADER_VIEW + position;
         } else if (headerViewsCountCount <= position && position < headerViewsCountCount + innerCount) {

@@ -77,7 +77,7 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
 //                        .color(Color.parseColor("#FF0000"))
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .build());
+                        .build(true));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

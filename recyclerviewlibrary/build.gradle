@@ -18,5 +18,5 @@ dependencies {
 //    compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     // recyclerview 分割线
-    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+//    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
 }

@@ -82,7 +82,7 @@ public class WChatGridActivity extends AppCompatActivity {
                         .colorResId(R.color.list_divider_color)
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_left_margin)
-                        .build());
+                        .build(false));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }

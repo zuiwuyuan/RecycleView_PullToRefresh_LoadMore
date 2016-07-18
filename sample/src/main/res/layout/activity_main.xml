@@ -20,10 +20,17 @@
         android:text="网络列表GridView" />
 
     <Button
-        android:id="@+id/btnAddHeaderFooter"
+        android:id="@+id/btnAddHeaderFooter1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="添加Header和Footer" />
+        android:text="添加Header和Footer的List" />
+
+    <Button
+        android:id="@+id/btnAddHeaderFooter2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="添加Header和Footer的Grid" />
 
 </LinearLayout>

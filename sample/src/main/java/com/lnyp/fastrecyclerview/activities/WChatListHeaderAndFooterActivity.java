@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * 带有header和footer的recyclerview
  */
-public class WChatHeaderAndFooterActivity extends AppCompatActivity {
+public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
 
     private static final String URL = "http://v.juhe.cn/weixin/query";
 
@@ -72,7 +72,7 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
 
         listWeChats.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(WChatHeaderAndFooterActivity.this)
+                new HorizontalDividerItemDecoration.Builder(WChatListHeaderAndFooterActivity.this)
                         .colorResId(R.color.list_divider_color)
 //                        .color(Color.parseColor("#FF0000"))
                         .sizeResId(R.dimen.list_divider_height)
@@ -102,7 +102,7 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(listWeChats, LoadingFooter.State.Normal);
                         break;
                     case 400:
-                        RecyclerViewStateUtils.setFooterViewState(WChatHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
+                        RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
 
@@ -156,11 +156,11 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
             }
 
             if (hasMore) {
-                RecyclerViewStateUtils.setFooterViewState(WChatHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
                 qrrDataFromServer();
 
             } else {
-                RecyclerViewStateUtils.setFooterViewState(WChatHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -168,7 +168,7 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(WChatHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
             qrrDataFromServer();
         }
     };
@@ -179,7 +179,7 @@ public class WChatHeaderAndFooterActivity extends AppCompatActivity {
             try {
                 int pos = (int) v.getTag();
 
-                Toast.makeText(WChatHeaderAndFooterActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WChatListHeaderAndFooterActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
 
             } catch (Exception e) {
                 e.printStackTrace();

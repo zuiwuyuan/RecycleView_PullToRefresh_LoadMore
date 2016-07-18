@@ -14,7 +14,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnGridView;
 
-    private Button btnAddHeaderFooter;
+    private Button btnAddHeaderFooter1;
+
+    private Button btnAddHeaderFooter2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         this.btnListView = (Button) findViewById(R.id.btnListView);
         this.btnGridView = (Button) findViewById(R.id.btnGridView);
-        this.btnAddHeaderFooter = (Button) findViewById(R.id.btnAddHeaderFooter);
+        this.btnAddHeaderFooter1 = (Button) findViewById(R.id.btnAddHeaderFooter1);
+        this.btnAddHeaderFooter2 = (Button) findViewById(R.id.btnAddHeaderFooter2);
     }
 
     private void initListener() {
         this.btnListView.setOnClickListener(this);
         this.btnGridView.setOnClickListener(this);
-        this.btnAddHeaderFooter.setOnClickListener(this);
+        this.btnAddHeaderFooter1.setOnClickListener(this);
+        this.btnAddHeaderFooter2.setOnClickListener(this);
     }
 
     @Override
@@ -48,8 +53,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnGridView:
                 startActivity(new Intent(this, WChatGridActivity.class));
                 break;
-            case R.id.btnAddHeaderFooter:
-                startActivity(new Intent(this, WChatHeaderAndFooterActivity.class));
+            case R.id.btnAddHeaderFooter1:
+                startActivity(new Intent(this, WChatListHeaderAndFooterActivity.class));
+                break;
+            case R.id.btnAddHeaderFooter2:
+                startActivity(new Intent(this, WChatGridHeaderAndFooterActivity.class));
                 break;
         }
     }

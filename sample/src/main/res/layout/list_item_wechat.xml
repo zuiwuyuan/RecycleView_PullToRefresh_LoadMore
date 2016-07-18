@@ -13,7 +13,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@mipmap/default_img" />
+            android:src="@drawable/empty_default_img" />
 
         <TextView
             android:id="@+id/textTitle"

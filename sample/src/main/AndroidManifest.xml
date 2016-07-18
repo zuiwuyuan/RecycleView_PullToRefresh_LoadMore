@@ -26,7 +26,10 @@
             android:name=".activities.WChatGridActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.WChatHeaderAndFooterActivity"
+            android:name=".activities.WChatListHeaderAndFooterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.WChatGridHeaderAndFooterActivity"
             android:screenOrientation="portrait" />
     </application>
 

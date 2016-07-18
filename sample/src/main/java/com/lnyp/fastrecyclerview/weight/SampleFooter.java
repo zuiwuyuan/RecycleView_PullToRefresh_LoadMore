@@ -6,12 +6,6 @@ import android.widget.RelativeLayout;
 
 import com.lnyp.fastrecyclerview.R;
 
-
-/**
- * Created by cundong on 2015/10/9.
- * <p/>
- * RecyclerView的FooterView，简单的展示一个TextView
- */
 public class SampleFooter extends RelativeLayout {
 
     public SampleFooter(Context context) {

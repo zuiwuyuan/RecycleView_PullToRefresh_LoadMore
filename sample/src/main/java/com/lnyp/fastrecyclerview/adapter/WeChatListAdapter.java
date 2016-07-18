@@ -52,7 +52,7 @@ public class WeChatListAdapter extends RecyclerView.Adapter {
         if (weChatModel != null) {
 
             try {
-                Glide.with(mContext).load(weChatModel.getFirstImg()).placeholder(R.mipmap.default_img).into(viewHolder.imgWeChat);
+                Glide.with(mContext).load(weChatModel.getFirstImg()).placeholder(R.drawable.empty_default_img).into(viewHolder.imgWeChat);
 
                 viewHolder.textTitle.setText(weChatModel.getTitle());
 

@@ -77,11 +77,11 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             outRect.set(0, 0, 0, 0);
             return;
         }
-        System.out.println("hasHeader : " + hasHeader);
+
         if (hasHeader) {
 
             if (position == 0) {
-                outRect.set(0, getDividerSize(position, parent), 0, 0);
+                outRect.set(0, 0, 0, 0);
                 return;
             } else {
                 position = position - 1;
@@ -89,8 +89,6 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
         }
 
         boolean isReverseLayout = isReverseLayout(parent);
-
-        System.out.println("isReverseLayout : " + isReverseLayout);
 
         if (isReverseLayout) {
             outRect.set(0, getDividerSize(position, parent), 0, 0);

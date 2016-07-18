@@ -3,6 +3,7 @@ package com.lnyp.fastrecyclerview.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import com.cundong.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.cundong.recyclerview.HeaderSpanSizeLookup;
 import com.cundong.recyclerview.LoadingFooter;
 import com.cundong.recyclerview.RecyclerViewStateUtils;
+import com.cundong.recyclerview.RecyclerViewUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
@@ -22,13 +24,17 @@ import com.lnyp.fastrecyclerview.http.HttpUtil;
 import com.lnyp.fastrecyclerview.http.IOAuthCallBack;
 import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
+import com.lnyp.fastrecyclerview.weight.SampleHeader;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WChatGridActivity extends AppCompatActivity {
+/**
+ * 带有header和footer的recyclerview
+ */
+public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
 
     private static final String URL = "http://v.juhe.cn/weixin/query";
 
@@ -47,7 +53,7 @@ public class WChatGridActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wchat_grid);
+        setContentView(R.layout.activity_wchat_grid_header_and_footer);
 
         initView();
 
@@ -75,7 +81,7 @@ public class WChatGridActivity extends AppCompatActivity {
                         .colorResId(R.color.list_divider_color)
                         .sizeResId(R.dimen.list_divider_height)
                         .margin(1)
-                        .build(false));
+                        .build(true));
 
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(this)
@@ -85,6 +91,8 @@ public class WChatGridActivity extends AppCompatActivity {
                         .build(false));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
+
+        RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
 
     private void qrrDataFromServer() {
@@ -104,7 +112,7 @@ public class WChatGridActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(listWeChats, LoadingFooter.State.Normal);
                         break;
                     case 400:
-                        RecyclerViewStateUtils.setFooterViewState(WChatGridActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
+                        RecyclerViewStateUtils.setFooterViewState(WChatGridHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
 
@@ -158,11 +166,11 @@ public class WChatGridActivity extends AppCompatActivity {
             }
 
             if (hasMore) {
-                RecyclerViewStateUtils.setFooterViewState(WChatGridActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatGridHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
                 qrrDataFromServer();
 
             } else {
-                RecyclerViewStateUtils.setFooterViewState(WChatGridActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatGridHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -170,7 +178,7 @@ public class WChatGridActivity extends AppCompatActivity {
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(WChatGridActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(WChatGridHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
             qrrDataFromServer();
         }
     };
@@ -181,7 +189,7 @@ public class WChatGridActivity extends AppCompatActivity {
             try {
                 int pos = (int) v.getTag();
 
-                Toast.makeText(WChatGridActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WChatGridHeaderAndFooterActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
 
             } catch (Exception e) {
                 e.printStackTrace();

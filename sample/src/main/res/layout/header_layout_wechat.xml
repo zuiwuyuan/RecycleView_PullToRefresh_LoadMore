@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F8F8"
     android:orientation="vertical">
 
     <ImageView
@@ -15,12 +16,12 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:text="这是添加的Header头"
-        android:textSize="16sp"
-        />
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#00c7c0"
-        android:layout_marginBottom="4dp"
-        />
+        android:background="#00c7c0" />
+
 </LinearLayout>

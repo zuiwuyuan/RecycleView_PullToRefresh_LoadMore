@@ -8,9 +8,6 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by yqritc on 2015/01/15.
- */
 public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
 
     private MarginProvider mMarginProvider;
@@ -26,6 +23,14 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
 
     @Override
     protected Rect getDividerBound(int position, RecyclerView parent, View child) {
+
+        if (hasHeader) {
+
+            if (position == 0) {
+                return new Rect(0, 0, 0, 0);
+            }
+        }
+
         Rect bounds = new Rect(0, 0, 0, 0);
         int transitionX = (int) ViewCompat.getTranslationX(child);
         int transitionY = (int) ViewCompat.getTranslationY(child);
@@ -73,10 +78,6 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
     @Override
     protected void setItemOffsets(Rect outRect, int position, RecyclerView parent) {
 
-        if (mPositionInsideItem) {
-            outRect.set(0, 0, 0, 0);
-            return;
-        }
 
         if (hasHeader) {
 
@@ -87,6 +88,12 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
                 position = position - 1;
             }
         }
+
+        if (mPositionInsideItem) {
+            outRect.set(0, 0, 0, 0);
+            return;
+        }
+
 
         boolean isReverseLayout = isReverseLayout(parent);
 

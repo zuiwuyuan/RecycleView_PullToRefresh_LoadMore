@@ -3,7 +3,6 @@ package com.lnyp.fastrecyclerview.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
@@ -88,7 +87,7 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
                         .colorResId(R.color.list_divider_color)
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_left_margin)
-                        .build(false));
+                        .build(true));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

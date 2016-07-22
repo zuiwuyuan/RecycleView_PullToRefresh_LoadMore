@@ -73,15 +73,15 @@ public class WChatGridActivity extends AppCompatActivity {
         listWeChats.addItemDecoration(
                 new VerticalDividerItemDecoration.Builder(this)
                         .colorResId(R.color.list_divider_color)
-                        .sizeResId(R.dimen.list_divider_height)
+                        .size(1)
                         .margin(1)
                         .build(false));
 
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(this)
                         .colorResId(R.color.list_divider_color)
-                        .sizeResId(R.dimen.list_divider_height)
-                        .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_left_margin)
+                        .size(1)
+                        .margin(1)
                         .build(false));
 
         listWeChats.addOnScrollListener(mOnScrollListener);

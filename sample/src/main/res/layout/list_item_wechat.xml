@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#FF0000"
     android:layout_height="wrap_content">
 
     <RelativeLayout
@@ -10,6 +11,7 @@
         <ImageView
             android:id="@+id/imgWeChat"
             android:layout_width="match_parent"
+            android:scaleType="centerCrop"
             android:layout_height="200dp"
             android:src="@drawable/empty_default_img" />
 

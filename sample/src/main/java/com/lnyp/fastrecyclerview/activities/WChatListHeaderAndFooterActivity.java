@@ -82,7 +82,6 @@ public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
         listWeChats.addOnScrollListener(mOnScrollListener);
 
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
-//        RecyclerViewUtils.setFooterView(listWeChats, new SampleFooter(this));
     }
 
     private void qrrDataFromServer() {

@@ -24,8 +24,7 @@ import com.lnyp.fastrecyclerview.http.IOAuthCallBack;
 import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
 import com.lnyp.fastrecyclerview.weight.SampleHeader;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
-import com.yqritc.recyclerviewflexibledivider.VerticalDividerItemDecoration;
+import com.yqritc.recyclerviewflexibledivider.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,24 +69,25 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
+        listWeChats.addItemDecoration(new GridSpacingItemDecoration(3,20,false,true));
 
-        listWeChats.addItemDecoration(
-                new VerticalDividerItemDecoration.Builder(this)
-                        .colorResId(R.color.list_divider_color)
-                        .size(1)
-                        .margin(1)
-                        .build(true));
-
-        listWeChats.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(this)
-                        .colorResId(R.color.list_divider_color)
-                        .size(1)
-                        .margin(1)
-                        .build(true));
+//        listWeChats.addItemDecoration(
+//                new VerticalDividerItemDecoration.Builder(this)
+//                        .colorResId(R.color.list_divider_color)
+//                        .size(1)
+//                        .margin(1)
+//                        .build(true));
+//
+//        listWeChats.addItemDecoration(
+//                new HorizontalDividerItemDecoration.Builder(this)
+//                        .colorResId(R.color.list_divider_color)
+//                        .size(1)
+//                        .margin(1)
+//                        .build(true));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

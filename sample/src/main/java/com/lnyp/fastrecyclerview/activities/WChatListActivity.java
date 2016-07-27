@@ -66,7 +66,6 @@ public class WChatListActivity extends AppCompatActivity {
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
-//                        .colorResId(R.color.list_divider_color)
                         .color(Color.parseColor("#00c7c0"))
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)

@@ -100,6 +100,7 @@ public abstract class FlexibleDividerDecoration extends RecyclerView.ItemDecorat
                 // Avoid remaining divider when animation starts
                 continue;
             }
+
             lastChildPosition = childPosition;
 
             if (!mShowLastDivider && childPosition >= itemCount - lastDividerOffset) {

@@ -4,10 +4,13 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.apkfuns.logutils.LogUtils;
+import com.cundong.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.cundong.recyclerview.R;
 
 /**
@@ -41,67 +44,103 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
 
-//        final int left = parent.getPaddingLeft();
-//        final int right = parent.getWidth() - parent.getPaddingRight();
-//        final int childCount = parent.getChildCount();
-//
-//        System.out.println("childCount: " + childCount);
-//
-//        System.out.println("left: " + left + " right: " + right);
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
 
-        RecyclerView.Adapter adapter = parent.getAdapter();
-        if (adapter == null) {
+        if (mAdapter == null) {
             return;
         }
 
-        int itemCount = adapter.getItemCount();
-        int lastDividerOffset = getLastDividerOffset(parent);
-        int validChildCount = parent.getChildCount();
-        int lastChildPosition = -1;
+        int itemCount = mAdapter.getItemCount();
 
-        System.out.println("itemCount: " + itemCount + "  lastDividerOffset: " + lastDividerOffset + "  validChildCount: " + validChildCount);
+        for (int i = 0; i < itemCount; i++) {
 
-//        for (int i = 0; i < validChildCount; i++) {
-//            View child = parent.getChildAt(i);
-//            int childPosition = parent.getChildAdapterPosition(child);
-//
-//            if (childPosition < lastChildPosition) {
-//                // Avoid remaining divider when animation starts
-//                continue;
-//            }
-//            lastChildPosition = childPosition;
-//
-//            if (!mShowLastDivider && childPosition >= itemCount - lastDividerOffset) {
-//                // Don't draw divider for last line if mShowLastDivider = false
-//                continue;
-//            }
-//
-//            if (wasDividerAlreadyDrawn(childPosition, parent)) {
-//                // No need to draw divider again as it was drawn already by previous column
-//                continue;
-//            }
-//
-//            int groupIndex = getGroupIndex(childPosition, parent);
-//            if (mVisibilityProvider.shouldHideDivider(groupIndex, parent)) {
-//                continue;
-//            }
+            final View child = parent.getChildAt(i);
 
-//        Rect bounds = getDividerBound(groupIndex, parent, child);
+            if (child != null) {
+
+                int childPosition = parent.getChildAdapterPosition(child);
+
+                if (hasHeader) {
+
+                    if (childPosition == 0) {
+                        return;
+                    } else {
+                        childPosition = childPosition - 1;
+                    }
+
+                    if (mAdapter.isFooter(childPosition + 1)) {
+                        return;
+                    }
+                } else {
+
+                    if (mAdapter.isFooter(childPosition)) {
+                        return;
+                    }
+                }
 
 
+                if (includeEdge) {
+
+
+                } else {
+
+                    final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+
+                    final int left = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child));
+                    final int right = left + h_spacing;
+                    final int top = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child));
+                    final int bottom = child.getBottom() + params.bottomMargin + Math.round(ViewCompat.getTranslationY(child));
+
+//                    LogUtils.e("left: " + left + " right: " + right + " top: " + top + " bottom: " + bottom);
+
+                    mDivider.setBounds(left, top, right, bottom);
+                    mDivider.draw(c);
+
+                    if (childPosition >= spanCount) {
+
+                        LogUtils.e(childPosition);
+
+                        final int left1 = child.getLeft() + params.leftMargin + Math.round(ViewCompat.getTranslationX(child));
+                        final int right1 = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child) + h_spacing);
+                        final int top1 = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child)) - v_spacing;
+                        final int bottom1 = top1 + v_spacing;
+
+//                        LogUtils.e("childPosition : " + childPosition + "  left: " + left1 + " right: " + right1 + " top: " + top1 + " bottom: " + bottom1);
+
+                        mDivider.setBounds(left1, top1, right1, bottom1);
+                        mDivider.draw(c);
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+
         int position = parent.getChildAdapterPosition(view);
 
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+
+        /**
+         * header和footer
+         */
         if (hasHeader) {
 
             if (position == 0) {
-                outRect.set(0, 0, 0, 0);
                 return;
             } else {
                 position = position - 1;
+            }
+
+            if (mAdapter.isFooter(position + 1)) {
+                return;
+            }
+
+        } else {
+
+            if (mAdapter.isFooter(position)) {
+                return;
             }
         }
 
@@ -126,6 +165,7 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
 
     private int getLastDividerOffset(RecyclerView parent) {
+
         if (parent.getLayoutManager() instanceof GridLayoutManager) {
             GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
             GridLayoutManager.SpanSizeLookup spanSizeLookup = layoutManager.getSpanSizeLookup();

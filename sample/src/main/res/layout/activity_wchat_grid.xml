@@ -6,7 +6,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listWeChats"
         android:layout_width="match_parent"
-        android:background="#00c7c0"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

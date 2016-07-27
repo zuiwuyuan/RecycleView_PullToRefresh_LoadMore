@@ -68,7 +68,7 @@ public class WChatGridActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 2, 100, 10, false, false));
+        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 2, 100, 20, false, false));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }

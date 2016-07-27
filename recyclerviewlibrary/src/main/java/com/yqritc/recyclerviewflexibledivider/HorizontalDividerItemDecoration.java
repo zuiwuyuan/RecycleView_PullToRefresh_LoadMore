@@ -25,7 +25,6 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
     protected Rect getDividerBound(int position, RecyclerView parent, View child) {
 
         if (hasHeader) {
-
             if (position == 0) {
                 return new Rect(0, 0, 0, 0);
             }

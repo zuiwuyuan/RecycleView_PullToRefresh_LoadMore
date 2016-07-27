@@ -73,21 +73,7 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 3, 20, false, true));
-
-//        listWeChats.addItemDecoration(
-//                new VerticalDividerItemDecoration.Builder(this)
-//                        .colorResId(R.color.list_divider_color)
-//                        .size(1)
-//                        .margin(1)
-//                        .build(true));
-//
-//        listWeChats.addItemDecoration(
-//                new HorizontalDividerItemDecoration.Builder(this)
-//                        .colorResId(R.color.list_divider_color)
-//                        .size(1)
-//                        .margin(1)
-//                        .build(true));
+        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 3, 20, 10, false, true));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

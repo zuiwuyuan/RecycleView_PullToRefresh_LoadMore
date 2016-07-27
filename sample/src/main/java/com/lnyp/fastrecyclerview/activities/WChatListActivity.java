@@ -60,7 +60,6 @@ public class WChatListActivity extends AppCompatActivity {
         mDatas = new ArrayList<>();
 
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
-
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 

@@ -7,11 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.cundong.recyclerview.EndlessRecyclerOnScrollListener;
-import com.cundong.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.cundong.recyclerview.HeaderSpanSizeLookup;
-import com.cundong.recyclerview.LoadingFooter;
-import com.cundong.recyclerview.RecyclerViewStateUtils;
+import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.HeaderSpanSizeLookup;
+import com.lnyp.recyclerview.LoadingFooter;
+import com.lnyp.recyclerview.RecyclerViewStateUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
@@ -22,7 +22,7 @@ import com.lnyp.fastrecyclerview.http.HttpUtil;
 import com.lnyp.fastrecyclerview.http.IOAuthCallBack;
 import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
-import com.yqritc.recyclerviewflexibledivider.GridSpacingItemDecoration;
+import com.lnyp.flexibledivider.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

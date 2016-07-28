@@ -1,17 +1,15 @@
-package com.yqritc.recyclerviewflexibledivider;
+package com.lnyp.flexibledivider;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.apkfuns.logutils.LogUtils;
-import com.cundong.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.cundong.recyclerview.R;
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.R;
 
 /**
  *
@@ -56,21 +54,13 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         int itemCount = mAdapter.getItemCount();
 
-        LogUtils.e("itemCount:  " + itemCount);
-
         for (int i = 0; i < itemCount; i++) {
 
-            LogUtils.e("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: " + i);
-
             View child = parent.getChildAt(i);
-
-            LogUtils.e("child:  " + child);
 
             if (child != null) {
 
                 int childPosition = parent.getChildAdapterPosition(child);
-
-                LogUtils.e("childPosition:  " + childPosition);
 
                 if (hasHeader) {
                     if (childPosition == 0) {
@@ -102,8 +92,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                     final int top = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child));
                     final int bottom = child.getBottom() + params.bottomMargin + Math.round(ViewCompat.getTranslationY(child));
 
-//                    LogUtils.e("left: " + left + " right: " + right + " top: " + top + " bottom: " + bottom);
-
                     mDivider.setBounds(left, top, right, bottom);
                     mDivider.draw(c);
 
@@ -113,8 +101,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                         final int right1 = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child) + h_spacing);
                         final int top1 = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child)) - v_spacing;
                         final int bottom1 = top1 + v_spacing;
-
-//                        LogUtils.e("childPosition : " + childPosition + "  left: " + left1 + " right: " + right1 + " top: " + top1 + " bottom: " + bottom1);
 
                         mDivider.setBounds(left1, top1, right1, bottom1);
                         mDivider.draw(c);

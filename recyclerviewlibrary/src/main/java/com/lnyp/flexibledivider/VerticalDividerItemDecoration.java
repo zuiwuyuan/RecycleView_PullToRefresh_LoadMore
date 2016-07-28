@@ -1,4 +1,4 @@
-package com.yqritc.recyclerviewflexibledivider;
+package com.lnyp.flexibledivider;
 
 import android.content.Context;
 import android.graphics.Rect;

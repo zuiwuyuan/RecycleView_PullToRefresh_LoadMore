@@ -1,5 +1,6 @@
 package com.lnyp.fastrecyclerview.activities;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,12 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
-import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.lnyp.recyclerview.HeaderSpanSizeLookup;
-import com.lnyp.recyclerview.LoadingFooter;
-import com.lnyp.recyclerview.RecyclerViewStateUtils;
-import com.lnyp.recyclerview.RecyclerViewUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.lidroid.xutils.util.LogUtils;
@@ -25,6 +20,12 @@ import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
 import com.lnyp.fastrecyclerview.weight.SampleHeader;
 import com.lnyp.flexibledivider.GridSpacingItemDecoration;
+import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.HeaderSpanSizeLookup;
+import com.lnyp.recyclerview.LoadingFooter;
+import com.lnyp.recyclerview.RecyclerViewStateUtils;
+import com.lnyp.recyclerview.RecyclerViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +74,18 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 2, 100, 20, false, true));
+//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
+        itemDecoration.setHasHeader(true);
+        itemDecoration.setH_spacing(50);
+        itemDecoration.setV_spacing(50);
+//        itemDecoration.setmDivider(mDivider);
+
+        itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+
+        listWeChats.addItemDecoration(itemDecoration);
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

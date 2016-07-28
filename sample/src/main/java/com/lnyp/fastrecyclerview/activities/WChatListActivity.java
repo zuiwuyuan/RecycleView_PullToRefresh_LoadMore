@@ -68,6 +68,7 @@ public class WChatListActivity extends AppCompatActivity {
                 new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
                         .color(Color.parseColor("#00c7c0"))
                         .sizeResId(R.dimen.list_divider_height)
+                        .showLastDivider()
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
                         .build(false));
 

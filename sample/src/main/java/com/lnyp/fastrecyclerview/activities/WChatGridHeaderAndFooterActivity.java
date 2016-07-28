@@ -69,11 +69,11 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 3, 100, 20, false, true));
+        listWeChats.addItemDecoration(new GridSpacingItemDecoration(this, 2, 100, 20, false, true));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 

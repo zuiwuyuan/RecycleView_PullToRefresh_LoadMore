@@ -30,6 +30,8 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
     Drawable mDivider;
 
+//    Drawable mDividerVertical;
+
     public GridSpacingItemDecoration(Context mContext, int spanCount, int h_spacing, int v_spacing, boolean includeEdge, boolean hasHeader) {
         this.spanCount = spanCount;
         this.h_spacing = h_spacing;
@@ -38,6 +40,8 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         this.hasHeader = hasHeader;
 
         mDivider = mContext.getResources().getDrawable(R.drawable.list_divider);
+
+//        mDividerVertical = mContext.getResources().getDrawable(R.drawable.list_divider_vertical);
     }
 
     @Override
@@ -52,32 +56,39 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         int itemCount = mAdapter.getItemCount();
 
+        LogUtils.e("itemCount:  " + itemCount);
+
         for (int i = 0; i < itemCount; i++) {
 
-            final View child = parent.getChildAt(i);
+            LogUtils.e("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX: " + i);
+
+            View child = parent.getChildAt(i);
+
+            LogUtils.e("child:  " + child);
 
             if (child != null) {
 
                 int childPosition = parent.getChildAdapterPosition(child);
 
-                if (hasHeader) {
+                LogUtils.e("childPosition:  " + childPosition);
 
+                if (hasHeader) {
                     if (childPosition == 0) {
-                        return;
+                        continue;
                     } else {
                         childPosition = childPosition - 1;
                     }
 
                     if (mAdapter.isFooter(childPosition + 1)) {
-                        return;
+                        continue;
                     }
+
                 } else {
 
                     if (mAdapter.isFooter(childPosition)) {
-                        return;
+                        continue;
                     }
                 }
-
 
                 if (includeEdge) {
 
@@ -97,8 +108,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                     mDivider.draw(c);
 
                     if (childPosition >= spanCount) {
-
-                        LogUtils.e(childPosition);
 
                         final int left1 = child.getLeft() + params.leftMargin + Math.round(ViewCompat.getTranslationX(child));
                         final int right1 = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child) + h_spacing);
@@ -136,7 +145,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
             if (mAdapter.isFooter(position + 1)) {
                 return;
             }
-
         } else {
 
             if (mAdapter.isFooter(position)) {
@@ -161,22 +169,5 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                 outRect.top = v_spacing;
             }
         }
-    }
-
-
-    private int getLastDividerOffset(RecyclerView parent) {
-
-        if (parent.getLayoutManager() instanceof GridLayoutManager) {
-            GridLayoutManager layoutManager = (GridLayoutManager) parent.getLayoutManager();
-            GridLayoutManager.SpanSizeLookup spanSizeLookup = layoutManager.getSpanSizeLookup();
-            int spanCount = layoutManager.getSpanCount();
-            int itemCount = parent.getAdapter().getItemCount();
-            for (int i = itemCount - 1; i >= 0; i--) {
-                if (spanSizeLookup.getSpanIndex(i, spanCount) == 0) {
-                    return itemCount - i;
-                }
-            }
-        }
-        return 1;
     }
 }

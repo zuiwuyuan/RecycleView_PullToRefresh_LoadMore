@@ -9,6 +9,7 @@
  5. 未扩展下拉刷新功能，如需要，请使用Android官方提供的SwipeRefreshLayout 。
 
  在介绍我整合的项目之前，有必要先说明下我整合的两个最重要的库，他们才是真的原创，希望大家尊重原创。
+
 Thanks：
  该项目主要整合了两个开源项目，是在它们的基础上进行的再创造：
  1. RecyclerView分割线：https://github.com/yqritc/RecyclerView-FlexibleDivider
@@ -16,20 +17,20 @@ Thanks：
 
 效果图：
 · 垂直列表，添加分割线
-
+![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/2.png)
 
 · 网格列表，添加分割线
-
+![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/3.png)
 
 · 垂直列表，添加HeaderView
-
+![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/4.png)
 
 · 网格列表，添加HeaderView
-
+![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/5.png)
 
 
 · 加载更多数据网络错误时，提示重新加载。
-
+![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/6.png)
 
  实现：
   关于该库是如何整合的，此处不多介绍的，有兴趣的人可以下载源码去看看，当然，不足之处，也可以进行再次扩展。
@@ -160,5 +161,6 @@ private void initView() {
     }
 
   以上就是我整合使用的RecyclerView，挺顺手的，我已经在多个项目中使用它了，希望更多的人能喜欢支持它。
+  如果对你有帮助，请star下吧，谢谢。
 
 

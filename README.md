@@ -36,14 +36,17 @@ Thanks：
   关于该库是如何整合的，此处不多介绍的，有兴趣的人可以下载源码去看看，当然，不足之处，也可以进行再次扩展。
  关于该库的使用，我还是建议大家该library下载下来，导入自己项目，这样也方便自己随意修改使用。
 
- 1. 实现垂直列表
+  1. 实现垂直列表
+private void initView() {
 
-        private void initView() {
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
+
         mDatas = new ArrayList<>();
+
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
         HeaderAndFooterRecyclerViewAdapter  recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
+
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
@@ -52,59 +55,76 @@ Thanks：
                         .showLastDivider()
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
                         .build(false));
+
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
- 
- 简析：HeaderAndFooterRecyclerViewAdapter主要是为了是对RecyclerView.Adapter的扩展实现，通过它，可以添加HeaderView和FooterView（具体可看源码）。HorizontalDividerItemDecoration则是扩展了RecyclerView.ItemDecoration，用于为垂直列表添加分割线，如果你是一个横向的列表，则可以使用另一个ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参加项目的示例。
+ 简析：HeaderAndFooterRecyclerViewAdapter主要是为了是对RecyclerView.Adapter的扩展实现，通过它，可以添加HeaderView和FooterView（具体可看源码）。HorizontalDividerItemDecoration则是扩展了RecyclerView.ItemDecoration，用于为垂直列表添加分割线，如果你是一个横向的列表，则可以使用另一个
+ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参加项目的示例。
 
 2. 实现网格列表
-         private void initView() {
+ private void initView() {
+
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
+
         mDatas = new ArrayList<>();
+
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
+
         HeaderAndFooterRecyclerViewAdapter recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
-        //        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-        //        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+
+//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
         itemDecoration.setH_spacing(50);
         itemDecoration.setV_spacing(50);
-        //        itemDecoration.setmDivider(mDivider);
+//        itemDecoration.setmDivider(mDivider);
+
         itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+
         listWeChats.addItemDecoration(itemDecoration);
+
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
-
 简析：GridSpacingItemDecoration 用于为列表添加分割线。具体的使用可参加项目的示例。
 
 3. 实现带有HeaderView的垂直列表
+private void initView() {
 
-        private void initView() {
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
+
         mDatas = new ArrayList<>();
+
+
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
         HeaderAndFooterRecyclerViewAdapter  recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
+
         listWeChats.setAdapter(recyclerViewAdapter);
+
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
+
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(WChatListHeaderAndFooterActivity.this)
                         .colorResId(R.color.list_divider_color)
-        //                        .color(Color.parseColor("#FF0000"))
+//                        .color(Color.parseColor("#FF0000"))
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
                         .build(true));
+
         listWeChats.addOnScrollListener(mOnScrollListener);
+
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
-
 简析：RecyclerViewUtils，可以很方便的为RecyclerView添加HeaderView。
 
 4. 实现带有HeaderView的网格布局
+ private void initView() {
 
-         private void initView() {
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
 
         mDatas = new ArrayList<>();
@@ -118,14 +138,14 @@ Thanks：
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-        //        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-        //        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
         itemDecoration.setHasHeader(true);
         itemDecoration.setH_spacing(50);
         itemDecoration.setV_spacing(50);
-        //        itemDecoration.setmDivider(mDivider);
+//        itemDecoration.setmDivider(mDivider);
 
         itemDecoration.setDividerColor(Color.parseColor("#008E00"));
 

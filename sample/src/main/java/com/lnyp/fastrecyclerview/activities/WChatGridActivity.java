@@ -62,7 +62,7 @@ public class WChatGridActivity extends AppCompatActivity {
 
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
 
-        recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
+        HeaderAndFooterRecyclerViewAdapter recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);

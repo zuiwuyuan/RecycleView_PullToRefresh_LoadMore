@@ -1,6 +1,9 @@
 package com.lnyp.fastrecyclerview.activities;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -49,6 +52,8 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
 
     private boolean hasMore = false;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +61,8 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
 
         initView();
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
         qrrDataFromServer();
     }
 
@@ -74,22 +81,26 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
-        itemDecoration.setHasHeader(true);
-        itemDecoration.setH_spacing(50);
-        itemDecoration.setV_spacing(50);
-//        itemDecoration.setmDivider(mDivider);
+        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#F0C7C0"));
 
-        itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
+                .hasHeader()
+                .setSpanCount(2)
+                .setH_spacing(50)
+                .setV_spacing(50)
+//                .setDividerColor(Color.parseColor("#008E00"))
+                .setmDivider(colorDrawable)
+//                .setmDivider(mDivider)
+                .build();
 
         listWeChats.addItemDecoration(itemDecoration);
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
+
     }
 
     private void qrrDataFromServer() {
@@ -112,6 +123,8 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(WChatGridHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
+
+                progressDialog.dismiss();
 
             }
         });

@@ -1,5 +1,6 @@
 package com.lnyp.fastrecyclerview.activities;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -43,6 +44,8 @@ public class WChatListActivity extends AppCompatActivity {
 
     private boolean hasMore = false;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +53,8 @@ public class WChatListActivity extends AppCompatActivity {
 
         initView();
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
         qrrDataFromServer();
     }
 
@@ -70,7 +75,7 @@ public class WChatListActivity extends AppCompatActivity {
                         .sizeResId(R.dimen.list_divider_height)
                         .showLastDivider()
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .build(false));
+                        .build());
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
@@ -95,6 +100,8 @@ public class WChatListActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(WChatListActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
+
+                progressDialog.dismiss();
 
             }
         });

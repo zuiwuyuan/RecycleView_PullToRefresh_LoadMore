@@ -1,16 +1,10 @@
 package com.lnyp.flexibledivider;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DimenRes;
-import android.support.annotation.DrawableRes;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,26 +12,15 @@ import android.view.View;
 import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 
 /**
- *
+ * 网格布局分割线
  */
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
-    private Context mContext;
+    private Builder builder;
 
-    private Drawable mDivider;
+    public GridSpacingItemDecoration(Builder builder) {
 
-    private int spanCount;
-
-    private int h_spacing;
-
-    private int v_spacing;
-
-    private boolean hasHeader;
-
-    public GridSpacingItemDecoration(Context mContext, int spanCount) {
-
-        this.mContext = mContext;
-        this.spanCount = spanCount;
+        this.builder = builder;
     }
 
 
@@ -61,7 +44,7 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
                 int childPosition = parent.getChildAdapterPosition(child);
 
-                if (hasHeader) {
+                if (builder.hasHeader) {
                     if (childPosition == 0) {
                         continue;
                     } else {
@@ -82,22 +65,22 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                 final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
 
                 final int left = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child));
-                final int right = left + h_spacing;
+                final int right = left + builder.h_spacing;
                 final int top = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child));
                 final int bottom = child.getBottom() + params.bottomMargin + Math.round(ViewCompat.getTranslationY(child));
 
-                mDivider.setBounds(left, top, right, bottom);
-                mDivider.draw(c);
+                builder.mDivider.setBounds(left, top, right, bottom);
+                builder.mDivider.draw(c);
 
-                if (childPosition >= spanCount) {
+                if (childPosition >= builder.spanCount) {
 
                     final int left1 = child.getLeft() + params.leftMargin + Math.round(ViewCompat.getTranslationX(child));
-                    final int right1 = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child) + h_spacing);
-                    final int top1 = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child)) - v_spacing;
-                    final int bottom1 = top1 + v_spacing;
+                    final int right1 = child.getRight() + params.rightMargin + Math.round(ViewCompat.getTranslationX(child) + builder.h_spacing);
+                    final int top1 = child.getTop() + params.topMargin + Math.round(ViewCompat.getTranslationY(child)) - builder.v_spacing;
+                    final int bottom1 = top1 + builder.v_spacing;
 
-                    mDivider.setBounds(left1, top1, right1, bottom1);
-                    mDivider.draw(c);
+                    builder.mDivider.setBounds(left1, top1, right1, bottom1);
+                    builder.mDivider.draw(c);
                 }
             }
         }
@@ -113,7 +96,7 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         /**
          * header和footer
          */
-        if (hasHeader) {
+        if (builder.hasHeader) {
 
             if (position == 0) {
                 return;
@@ -131,36 +114,65 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
             }
         }
 
-        int column = position % spanCount;
+        int column = position % builder.spanCount;
 
-        outRect.left = column * h_spacing / spanCount;
-        outRect.right = h_spacing - (column + 1) * h_spacing / spanCount;
-        if (position >= spanCount) {
-            outRect.top = v_spacing;
+        outRect.left = column * builder.h_spacing / builder.spanCount;
+        outRect.right = builder.h_spacing - (column + 1) * builder.h_spacing / builder.spanCount;
+        if (position >= builder.spanCount) {
+            outRect.top = builder.v_spacing;
         }
     }
 
-    public void setmDivider(Drawable mDivider) {
-        this.mDivider = mDivider;
-    }
+    public static class Builder {
 
-    public void setH_spacing(int h_spacing) {
-        this.h_spacing = h_spacing;
-    }
+        private Context mContext;
 
-    public void setV_spacing(int v_spacing) {
-        this.v_spacing = v_spacing;
-    }
+        private Drawable mDivider;
 
-    public void setSpanCount(int spanCount) {
-        this.spanCount = spanCount;
-    }
+        private int spanCount;
 
-    public void setHasHeader(boolean hasHeader) {
-        this.hasHeader = hasHeader;
-    }
+        private int h_spacing = 1;
 
-    public void setDividerColor(int color) {
-        this.mDivider = new ColorDrawable(color);
+        private int v_spacing = 1;
+
+        private boolean hasHeader = false;
+
+        public Builder(Context context) {
+            this.mContext = context;
+        }
+
+        public Builder hasHeader() {
+            this.hasHeader = true;
+            return this;
+        }
+
+        public Builder setDividerColor(int color) {
+            this.mDivider = new ColorDrawable(color);
+            return this;
+        }
+
+        public Builder setmDivider(Drawable mDivider) {
+            this.mDivider = mDivider;
+            return this;
+        }
+
+        public Builder setH_spacing(int h_spacing) {
+            this.h_spacing = h_spacing;
+            return this;
+        }
+
+        public Builder setV_spacing(int v_spacing) {
+            this.v_spacing = v_spacing;
+            return this;
+        }
+
+        public Builder setSpanCount(int spanCount) {
+            this.spanCount = spanCount;
+            return this;
+        }
+
+        public GridSpacingItemDecoration build() {
+            return new GridSpacingItemDecoration(this);
+        }
     }
 }

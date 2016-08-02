@@ -8,16 +8,21 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+
+/**
+ * 横向列表的垂直分割线
+ */
 public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
 
     private MarginProvider mMarginProvider;
 
-    private boolean hasHeader;
+    private static boolean hasHeader;
 
-    protected VerticalDividerItemDecoration(Builder builder, boolean hasHeader) {
+    protected VerticalDividerItemDecoration(Builder builder) {
         super(builder);
         mMarginProvider = builder.mMarginProvider;
-        this.hasHeader = hasHeader;
+//
     }
 
     @Override
@@ -28,6 +33,12 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
             if (position == 0) {
                 return new Rect(0, 0, 0, 0);
             }
+        }
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+
+        if (mAdapter.isFooter(position)) {
+
+            return new Rect(0, 0, 0, 0);
         }
 
         Rect bounds = new Rect(0, 0, 0, 0);
@@ -85,6 +96,13 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
             } else {
                 position = position - 1;
             }
+        }
+
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+
+        if (mAdapter.isFooter(position)) {
+
+            return;
         }
 
         if (mPositionInsideItem) {
@@ -167,6 +185,11 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
             });
         }
 
+        public Builder hasHeader() {
+            hasHeader = true;
+            return this;
+        }
+
         public Builder margin(int verticalMargin) {
             return margin(verticalMargin, verticalMargin);
         }
@@ -185,9 +208,9 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
             return this;
         }
 
-        public VerticalDividerItemDecoration build(boolean hasHeader) {
+        public VerticalDividerItemDecoration build() {
             checkBuilderParams();
-            return new VerticalDividerItemDecoration(this, hasHeader);
+            return new VerticalDividerItemDecoration(this);
         }
     }
 }

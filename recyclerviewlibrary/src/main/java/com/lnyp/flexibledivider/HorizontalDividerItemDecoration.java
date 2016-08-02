@@ -8,17 +8,20 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+
+/**
+ * 垂直列表的横向分割
+ */
 public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
 
     private MarginProvider mMarginProvider;
 
-    private boolean hasHeader;
+    private static boolean hasHeader;
 
-    protected HorizontalDividerItemDecoration(Builder builder, boolean hasHeader) {
+    protected HorizontalDividerItemDecoration(Builder builder) {
         super(builder);
         this.mMarginProvider = builder.mMarginProvider;
-
-        this.hasHeader = hasHeader;
     }
 
     @Override
@@ -28,6 +31,13 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             if (position == 0) {
                 return new Rect(0, 0, 0, 0);
             }
+        }
+
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+
+        if (mAdapter.isFooter(position)) {
+
+            return new Rect(0, 0, 0, 0);
         }
 
         Rect bounds = new Rect(0, 0, 0, 0);
@@ -77,7 +87,6 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
     @Override
     protected void setItemOffsets(Rect outRect, int position, RecyclerView parent) {
 
-
         if (hasHeader) {
 
             if (position == 0) {
@@ -86,6 +95,13 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             } else {
                 position = position - 1;
             }
+        }
+
+        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+
+        if (mAdapter.isFooter(position)) {
+            outRect.set(0, 0, 0, 0);
+            return;
         }
 
         if (mPositionInsideItem) {
@@ -171,6 +187,11 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             });
         }
 
+        public Builder hasHeader() {
+            hasHeader = true;
+            return this;
+        }
+
         public Builder margin(int horizontalMargin) {
             return margin(horizontalMargin, horizontalMargin);
         }
@@ -189,9 +210,9 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             return this;
         }
 
-        public HorizontalDividerItemDecoration build(boolean hasHeader) {
+        public HorizontalDividerItemDecoration build() {
             checkBuilderParams();
-            return new HorizontalDividerItemDecoration(this, hasHeader);
+            return new HorizontalDividerItemDecoration(this);
         }
     }
 }

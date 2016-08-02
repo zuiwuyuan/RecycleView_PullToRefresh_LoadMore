@@ -1,6 +1,9 @@
 package com.lnyp.fastrecyclerview.activities;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -44,6 +47,8 @@ public class WChatGridActivity extends AppCompatActivity {
 
     private boolean hasMore = false;
 
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,8 @@ public class WChatGridActivity extends AppCompatActivity {
 
         initView();
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.show();
         qrrDataFromServer();
     }
 
@@ -62,22 +69,23 @@ public class WChatGridActivity extends AppCompatActivity {
 
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
 
-        HeaderAndFooterRecyclerViewAdapter recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
+        recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
-        itemDecoration.setH_spacing(50);
-        itemDecoration.setV_spacing(50);
-//        itemDecoration.setmDivider(mDivider);
+        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
+                .setSpanCount(2)
+                .setH_spacing(50)
+                .setV_spacing(50)
+                .setmDivider(mDivider)
+                .build();
 
         listWeChats.addItemDecoration(itemDecoration);
 
@@ -94,7 +102,6 @@ public class WChatGridActivity extends AppCompatActivity {
         HttpUtil.sendRequest(this, HttpRequest.HttpMethod.GET, URL, requestParams, new IOAuthCallBack() {
             @Override
             public void getIOAuthCallBack(int code, String result) {
-
                 switch (code) {
                     case 200:
                         dealData(result);
@@ -104,6 +111,8 @@ public class WChatGridActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(WChatGridActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
+
+                progressDialog.dismiss();
 
             }
         });

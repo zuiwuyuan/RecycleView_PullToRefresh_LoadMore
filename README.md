@@ -36,7 +36,8 @@ Thanks：
   关于该库是如何整合的，此处不多介绍的，有兴趣的人可以下载源码去看看，当然，不足之处，也可以进行再次扩展。
  关于该库的使用，我还是建议大家该library下载下来，导入自己项目，这样也方便自己随意修改使用。
 
-  1. 实现垂直列表
+1. 实现垂直列表
+ ``` 
 private void initView() {
 
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
@@ -58,10 +59,13 @@ private void initView() {
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
+ ``` 
+ 
  简析：HeaderAndFooterRecyclerViewAdapter主要是为了是对RecyclerView.Adapter的扩展实现，通过它，可以添加HeaderView和FooterView（具体可看源码）。HorizontalDividerItemDecoration则是扩展了RecyclerView.ItemDecoration，用于为垂直列表添加分割线，如果你是一个横向的列表，则可以使用另一个
 ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参加项目的示例。
 
 2. 实现网格列表
+``` 
  private void initView() {
 
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
@@ -91,9 +95,11 @@ ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参�
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
+ ``` 
 简析：GridSpacingItemDecoration 用于为列表添加分割线。具体的使用可参加项目的示例。
 
 3. 实现带有HeaderView的垂直列表
+``` 
 private void initView() {
 
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
@@ -120,10 +126,12 @@ private void initView() {
 
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
+ ``` 
 简析：RecyclerViewUtils，可以很方便的为RecyclerView添加HeaderView。
 
 4. 实现带有HeaderView的网格布局
- private void initView() {
+```  
+private void initView() {
 
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
 
@@ -155,7 +163,8 @@ private void initView() {
 
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
+``` 
 
-  如果对你有帮助，请star下吧，谢谢。
+如果对你有帮助，请star下吧，谢谢。
 
 

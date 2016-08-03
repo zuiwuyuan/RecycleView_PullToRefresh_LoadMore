@@ -66,7 +66,7 @@ ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参�
 
 2. 实现网格列表
 ``` 
- private void initView() {
+private void initView() {
 
         listWeChats = (RecyclerView) findViewById(R.id.listWeChats);
 
@@ -81,20 +81,21 @@ ItemDecoration的实现：VerticalDividerItemDecoration。具体的使用可参�
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
-        itemDecoration.setH_spacing(50);
-        itemDecoration.setV_spacing(50);
-//        itemDecoration.setmDivider(mDivider);
+        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
+                .setSpanCount(2)
+                .setH_spacing(50)
+                .setV_spacing(50)
+                .setmDivider(mDivider)
+                .build();
 
         listWeChats.addItemDecoration(itemDecoration);
 
         listWeChats.addOnScrollListener(mOnScrollListener);
-    }
+ }
  ``` 
 简析：GridSpacingItemDecoration 用于为列表添加分割线。具体的使用可参加项目的示例。
 
@@ -146,22 +147,26 @@ private void initView() {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-//        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration(this, 2);
-        itemDecoration.setHasHeader(true);
-        itemDecoration.setH_spacing(50);
-        itemDecoration.setV_spacing(50);
-//        itemDecoration.setmDivider(mDivider);
+        Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#F0C7C0"));
 
-        itemDecoration.setDividerColor(Color.parseColor("#008E00"));
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
+                .hasHeader()
+                .setSpanCount(2)
+                .setH_spacing(50)
+                .setV_spacing(50)
+//                .setDividerColor(Color.parseColor("#008E00"))
+                .setmDivider(colorDrawable)
+//                .setmDivider(mDivider)
+                .build();
 
         listWeChats.addItemDecoration(itemDecoration);
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
+
     }
 ``` 
 

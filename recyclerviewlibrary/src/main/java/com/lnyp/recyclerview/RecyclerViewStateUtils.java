@@ -22,7 +22,7 @@ public class RecyclerViewStateUtils {
      * @param state         FooterView State
      * @param errorListener FooterView处于Error状态时的点击事件
      */
-    public static void setFooterViewState(Activity instance, RecyclerView recyclerView, int pageSize, LoadingFooter.State state, View.OnClickListener errorListener) {
+    public static void setFooterViewState(Activity instance, RecyclerView recyclerView, int pageSize, RecyclerViewLoadingFooter.State state, View.OnClickListener errorListener) {
 
         if (instance == null || instance.isFinishing()) {
             return;
@@ -41,22 +41,22 @@ public class RecyclerViewStateUtils {
             return;
         }
 
-        LoadingFooter footerView;
+        RecyclerViewLoadingFooter footerView;
 
         //已经有footerView了
         if (headerAndFooterAdapter.getFooterViewsCount() > 0) {
-            footerView = (LoadingFooter) headerAndFooterAdapter.getFooterView();
+            footerView = (RecyclerViewLoadingFooter) headerAndFooterAdapter.getFooterView();
             footerView.setState(state);
 
-            if (state == LoadingFooter.State.NetWorkError) {
+            if (state == RecyclerViewLoadingFooter.State.NetWorkError) {
                 footerView.setOnClickListener(errorListener);
             }
             recyclerView.scrollToPosition(headerAndFooterAdapter.getItemCount() - 1);
         } else {
-            footerView = new LoadingFooter(instance);
+            footerView = new RecyclerViewLoadingFooter(instance);
             footerView.setState(state);
 
-            if (state == LoadingFooter.State.NetWorkError) {
+            if (state == RecyclerViewLoadingFooter.State.NetWorkError) {
                 footerView.setOnClickListener(errorListener);
             }
 
@@ -70,17 +70,17 @@ public class RecyclerViewStateUtils {
      *
      * @param recyclerView
      */
-    public static LoadingFooter.State getFooterViewState(RecyclerView recyclerView) {
+    public static RecyclerViewLoadingFooter.State getFooterViewState(RecyclerView recyclerView) {
 
         RecyclerView.Adapter outerAdapter = recyclerView.getAdapter();
         if (outerAdapter != null && outerAdapter instanceof HeaderAndFooterRecyclerViewAdapter) {
             if (((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterViewsCount() > 0) {
-                LoadingFooter footerView = (LoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
+                RecyclerViewLoadingFooter footerView = (RecyclerViewLoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
                 return footerView.getState();
             }
         }
 
-        return LoadingFooter.State.Normal;
+        return RecyclerViewLoadingFooter.State.Normal;
     }
 
     /**
@@ -89,11 +89,11 @@ public class RecyclerViewStateUtils {
      * @param recyclerView
      * @param state
      */
-    public static void setFooterViewState(RecyclerView recyclerView, LoadingFooter.State state) {
+    public static void setFooterViewState(RecyclerView recyclerView, RecyclerViewLoadingFooter.State state) {
         RecyclerView.Adapter outerAdapter = recyclerView.getAdapter();
         if (outerAdapter != null && outerAdapter instanceof HeaderAndFooterRecyclerViewAdapter) {
             if (((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterViewsCount() > 0) {
-                LoadingFooter footerView = (LoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
+                RecyclerViewLoadingFooter footerView = (RecyclerViewLoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
                 footerView.setState(state);
             }
         }

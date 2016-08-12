@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
 import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.lnyp.recyclerview.LoadingFooter;
+import com.lnyp.recyclerview.RecyclerViewLoadingFooter;
 import com.lnyp.recyclerview.RecyclerViewStateUtils;
 import com.lnyp.recyclerview.RecyclerViewUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -104,10 +104,10 @@ public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
                 switch (code) {
                     case 200:
                         dealData(result);
-                        RecyclerViewStateUtils.setFooterViewState(listWeChats, LoadingFooter.State.Normal);
+                        RecyclerViewStateUtils.setFooterViewState(listWeChats, RecyclerViewLoadingFooter.State.Normal);
                         break;
                     case 400:
-                        RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.NetWorkError, mFooterClick);
+                        RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
 
@@ -155,19 +155,19 @@ public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
         @Override
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
-            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(listWeChats);
+            RecyclerViewLoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(listWeChats);
 
-            if (state == LoadingFooter.State.Loading) {
+            if (state == RecyclerViewLoadingFooter.State.Loading) {
                 LogUtils.e("the state is Loading, just wait..");
                 return;
             }
 
             if (hasMore) {
-                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
                 qrrDataFromServer();
 
             } else {
-                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -175,7 +175,7 @@ public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, LoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(WChatListHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
             qrrDataFromServer();
         }
     };

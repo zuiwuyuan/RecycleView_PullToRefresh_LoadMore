@@ -14,7 +14,7 @@ import android.widget.TextView;
  * <p/>
  * ListView/GridView/RecyclerView 分页加载时使用到的FooterView
  */
-public class LoadingFooter extends RelativeLayout {
+public class RecyclerViewLoadingFooter extends RelativeLayout {
 
     protected State mState = State.Normal;
     private View mLoadingView;
@@ -23,24 +23,24 @@ public class LoadingFooter extends RelativeLayout {
     private ProgressBar mLoadingProgress;
     private TextView mLoadingText;
 
-    public LoadingFooter(Context context) {
+    public RecyclerViewLoadingFooter(Context context) {
         super(context);
         init(context);
     }
 
-    public LoadingFooter(Context context, AttributeSet attrs) {
+    public RecyclerViewLoadingFooter(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public LoadingFooter(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RecyclerViewLoadingFooter(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
     public void init(Context context) {
 
-        inflate(context, R.layout.sample_common_list_footer, this);
+        inflate(context, R.layout.common_list_footer, this);
         setOnClickListener(null);
 
         setState(State.Normal, true);

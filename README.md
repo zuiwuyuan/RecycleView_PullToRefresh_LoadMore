@@ -17,19 +17,24 @@ Thanks：
 
 效果图：
 · 垂直列表，添加分割线
+
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/2.png)
 
 · 网格列表，添加分割线
+
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/3.png)
 
 · 垂直列表，添加HeaderView
+
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/4.png)
 
 · 网格列表，添加HeaderView
+
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/5.png)
 
 
 · 加载更多数据网络错误时，提示重新加载。
+
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/6.png)
 
  实现：

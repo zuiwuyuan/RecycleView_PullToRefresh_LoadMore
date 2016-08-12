@@ -185,7 +185,7 @@ private void initView() {
  
  ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/loader_footer.png)
 
- ** 如上图、我将加载更多、网络错误的footer view整合在了library库中，所以如果您需要对底部加载更多等页面进行自定义的话，请下载library库直接修改、并导入自己的项目中直接使用**
+**如上图、我将加载更多、网络错误的footerview整合在了library库中，所以如果您需要对底部加载更多等页面进行自定义的话，请下载library库直接修改、并导入自己的项目中直接使用**
  
 
 ***如果对你有帮助，请star下吧，谢谢。***

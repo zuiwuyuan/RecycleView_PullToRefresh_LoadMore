@@ -8,10 +8,10 @@
  4. 普通列表、网格列表均支持添加Header功能。 再不需要加载更多数据情况下，支持添加Footer。
  5. 未扩展下拉刷新功能，如需要，请使用Android官方提供的SwipeRefreshLayout 。
 
- 在介绍我整合的项目之前，有必要先说明下我整合的两个最重要的库，他们才是真的原创，希望大家尊重原创。
+ 
 
 ##Thanks：
- 该项目主要整合了两个开源项目，是在它们的基础上进行的再创造：
+ 在介绍我整合的项目之前，有必要先说明下我整合的两个最重要的库，他们才是真的原创，希望大家尊重原创。该项目主要整合了两个开源项目，是在它们的基础上进行的再创造：
  1. RecyclerView分割线：https://github.com/yqritc/RecyclerView-FlexibleDivider
  2. RecyclerView添加HeaderView和FooterView：https://github.com/cundong/HeaderAndFooterRecyclerView
 

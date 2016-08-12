@@ -1,8 +1,6 @@
 package com.lnyp.fastrecyclerview.activities;
 
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -78,12 +76,12 @@ public class WChatGridActivity extends AppCompatActivity {
         listWeChats.setLayoutManager(gridLayoutManager);
 
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
-//                .setH_spacing(50)
-//                .setV_spacing(50)
-//                .setmDivider(mDivider)
+                .setH_spacing(50)
+                .setV_spacing(50)
+                .setmDivider(mDivider)
                 .build();
 
         listWeChats.addItemDecoration(itemDecoration);

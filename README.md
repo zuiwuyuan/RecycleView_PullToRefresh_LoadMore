@@ -15,7 +15,9 @@ Thanks：
  1. RecyclerView分割线：https://github.com/yqritc/RecyclerView-FlexibleDivider
  2. RecyclerView添加HeaderView和FooterView：https://github.com/cundong/HeaderAndFooterRecyclerView
 
+
 效果图：
+
 · 垂直列表，添加分割线
 
 ![image](https://github.com/zuiwuyuan/RecycleView_PullToRefresh_LoadMore/blob/master/imgs/2.png)

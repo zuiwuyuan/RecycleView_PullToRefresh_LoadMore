@@ -21,6 +21,10 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
     public GridSpacingItemDecoration(Builder builder) {
 
         this.builder = builder;
+
+        if (this.builder.mDivider == null) {
+            this.builder.mDivider = new ColorDrawable(0x00FFFFFF);
+        }
     }
 
 
@@ -137,8 +141,9 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         private boolean hasHeader = false;
 
-        public Builder(Context context) {
+        public Builder(Context context, int spanCount) {
             this.mContext = context;
+            this.spanCount = spanCount;
         }
 
         public Builder hasHeader() {

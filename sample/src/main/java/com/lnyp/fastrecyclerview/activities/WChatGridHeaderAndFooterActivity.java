@@ -85,9 +85,8 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#F0C7C0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
                 .hasHeader()
-                .setSpanCount(2)
                 .setH_spacing(50)
                 .setV_spacing(50)
 //                .setDividerColor(Color.parseColor("#008E00"))

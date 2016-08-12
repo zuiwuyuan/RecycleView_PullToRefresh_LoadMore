@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER_VIEW = Integer.MIN_VALUE;
+
     private static final int TYPE_FOOTER_VIEW = Integer.MIN_VALUE + 1;
 
     /**
@@ -23,6 +24,7 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     private RecyclerView.Adapter<RecyclerView.ViewHolder> mInnerAdapter;
 
     private ArrayList<View> mHeaderViews = new ArrayList<>();
+
     private ArrayList<View> mFooterViews = new ArrayList<>();
 
     private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
@@ -72,11 +74,6 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
      * @param adapter
      */
     public void setAdapter(RecyclerView.Adapter<RecyclerView.ViewHolder> adapter) {
-
-        if (adapter != null) {
-            if (!(adapter instanceof RecyclerView.Adapter))
-                throw new RuntimeException("your adapter must be a RecyclerView.Adapter");
-        }
 
         if (mInnerAdapter != null) {
             notifyItemRangeRemoved(getHeaderViewsCount(), mInnerAdapter.getItemCount());
@@ -173,6 +170,7 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int headerViewsCountCount = getHeaderViewsCount();
+
         if (position >= headerViewsCountCount && position < headerViewsCountCount + mInnerAdapter.getItemCount()) {
             mInnerAdapter.onBindViewHolder(holder, position - headerViewsCountCount);
         } else {
@@ -190,7 +188,9 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
 
     @Override
     public int getItemViewType(int position) {
+
         int innerCount = mInnerAdapter.getItemCount();
+
         int headerViewsCountCount = getHeaderViewsCount();
 
         if (position < headerViewsCountCount) {

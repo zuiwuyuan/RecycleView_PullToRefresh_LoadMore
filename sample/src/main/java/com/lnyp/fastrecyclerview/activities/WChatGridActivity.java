@@ -69,6 +69,7 @@ public class WChatGridActivity extends AppCompatActivity {
 
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
 
+        // 必须将Adapter再次封装
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
@@ -76,15 +77,13 @@ public class WChatGridActivity extends AppCompatActivity {
         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
-
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
-        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this)
-                .setSpanCount(2)
-                .setH_spacing(50)
-                .setV_spacing(50)
-                .setmDivider(mDivider)
+        GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
+//                .setH_spacing(50)
+//                .setV_spacing(50)
+//                .setmDivider(mDivider)
                 .build();
 
         listWeChats.addItemDecoration(itemDecoration);

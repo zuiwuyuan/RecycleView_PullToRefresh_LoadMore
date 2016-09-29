@@ -33,11 +33,17 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             }
         }
 
-        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+//        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
 
-        if (mAdapter.isFooter(position)) {
+        RecyclerView.Adapter adapter = parent.getAdapter();
 
-            return new Rect(0, 0, 0, 0);
+        if (adapter instanceof HeaderAndFooterRecyclerViewAdapter) {
+
+            HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) adapter;
+            if (mAdapter.isFooter(position)) {
+
+                return new Rect(0, 0, 0, 0);
+            }
         }
 
         Rect bounds = new Rect(0, 0, 0, 0);
@@ -97,12 +103,17 @@ public class HorizontalDividerItemDecoration extends FlexibleDividerDecoration {
             }
         }
 
-        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+        RecyclerView.Adapter adapter = parent.getAdapter();
 
-        if (mAdapter.isFooter(position)) {
-            outRect.set(0, 0, 0, 0);
-            return;
+        if (adapter instanceof HeaderAndFooterRecyclerViewAdapter) {
+
+            HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) adapter;
+            if (mAdapter.isFooter(position)) {
+                outRect.set(0, 0, 0, 0);
+                return;
+            }
         }
+
 
         if (mPositionInsideItem) {
             outRect.set(0, 0, 0, 0);

@@ -43,6 +43,8 @@ public class WChatGridActivity extends AppCompatActivity {
 
     private HeaderAndFooterRecyclerViewAdapter recyclerViewAdapter;
 
+    private WeChatListAdapter weChatListAdapter;
+
     private int pno = 1;
 
     private boolean hasMore = false;
@@ -67,14 +69,14 @@ public class WChatGridActivity extends AppCompatActivity {
 
         mDatas = new ArrayList<>();
 
-        WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
+        weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
 
         // 必须将Adapter再次封装
-        recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
-        listWeChats.setAdapter(recyclerViewAdapter);
+//        recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
+        listWeChats.setAdapter(weChatListAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
+        gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup(listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
@@ -83,7 +85,7 @@ public class WChatGridActivity extends AppCompatActivity {
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
 //                .setH_spacing(50)
 //                .setV_spacing(50)
-//                .setmDivider(mDivider)
+                .setmDivider(mDivider)
                 .build();
 
         listWeChats.addItemDecoration(itemDecoration);
@@ -148,7 +150,7 @@ public class WChatGridActivity extends AppCompatActivity {
 
     private void updateData() {
 
-        recyclerViewAdapter.notifyDataSetChanged();
+        weChatListAdapter.notifyDataSetChanged();
     }
 
     private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {

@@ -87,6 +87,7 @@ public class WChatListHeaderAndFooterActivity extends AppCompatActivity {
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 
+        // 如果你要添加HeaderView，则必须使用HeaderAndFooterRecyclerViewAdapter
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
 

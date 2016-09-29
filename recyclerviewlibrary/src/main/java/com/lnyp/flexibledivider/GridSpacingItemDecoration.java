@@ -32,13 +32,16 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
 
-        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+//        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
 
-        if (mAdapter == null) {
-            return;
+        RecyclerView.Adapter adapter = parent.getAdapter();
+
+        HeaderAndFooterRecyclerViewAdapter mAdapter = null;
+        if (adapter instanceof HeaderAndFooterRecyclerViewAdapter) {
+            mAdapter = (HeaderAndFooterRecyclerViewAdapter) adapter;
         }
 
-        int itemCount = mAdapter.getItemCount();
+        int itemCount = adapter.getItemCount();
 
         for (int i = 0; i < itemCount; i++) {
 
@@ -55,13 +58,13 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                         childPosition = childPosition - 1;
                     }
 
-                    if (mAdapter.isFooter(childPosition + 1)) {
+                    if (mAdapter != null && mAdapter.isFooter(childPosition + 1)) {
                         continue;
                     }
 
                 } else {
 
-                    if (mAdapter.isFooter(childPosition)) {
+                    if (mAdapter != null && mAdapter.isFooter(childPosition)) {
                         continue;
                     }
                 }
@@ -95,8 +98,14 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         int position = parent.getChildAdapterPosition(view);
 
-        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+//        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
+        RecyclerView.Adapter adapter = parent.getAdapter();
 
+        HeaderAndFooterRecyclerViewAdapter mAdapter = null;
+
+        if (adapter instanceof HeaderAndFooterRecyclerViewAdapter) {
+            mAdapter = (HeaderAndFooterRecyclerViewAdapter) adapter;
+        }
         /**
          * header和footer
          */
@@ -108,12 +117,12 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
                 position = position - 1;
             }
 
-            if (mAdapter.isFooter(position + 1)) {
+            if (mAdapter != null && mAdapter.isFooter(position + 1)) {
                 return;
             }
         } else {
 
-            if (mAdapter.isFooter(position)) {
+            if (mAdapter != null && mAdapter.isFooter(position)) {
                 return;
             }
         }

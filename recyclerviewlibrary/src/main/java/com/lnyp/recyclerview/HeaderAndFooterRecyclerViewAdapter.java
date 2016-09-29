@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 /**
- * Created by cundong on 2015/10/9.
- * <p/>
  * RecyclerView.Adapter with Header and Footer
  */
 public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

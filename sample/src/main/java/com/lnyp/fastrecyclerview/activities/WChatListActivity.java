@@ -9,13 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
-import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
-import com.lnyp.recyclerview.RecyclerViewLoadingFooter;
-import com.lnyp.recyclerview.RecyclerViewStateUtils;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.lidroid.xutils.util.LogUtils;
 import com.lnyp.fastrecyclerview.R;
 import com.lnyp.fastrecyclerview.adapter.WeChatListAdapter;
 import com.lnyp.fastrecyclerview.bean.WeChatModel;
@@ -24,6 +19,10 @@ import com.lnyp.fastrecyclerview.http.IOAuthCallBack;
 import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
 import com.lnyp.flexibledivider.HorizontalDividerItemDecoration;
+import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
+import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.RecyclerViewLoadingFooter;
+import com.lnyp.recyclerview.RecyclerViewStateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,15 +69,17 @@ public class WChatListActivity extends AppCompatActivity {
         listWeChats.setAdapter(recyclerViewAdapter);
 
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
+
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
                         .color(Color.parseColor("#00c7c0"))
                         .sizeResId(R.dimen.list_divider_height)
-                        .showLastDivider()
+//                        .showLastDivider()
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
                         .build());
 
         listWeChats.addOnScrollListener(mOnScrollListener);
+
     }
 
     private void qrrDataFromServer() {
@@ -147,9 +148,7 @@ public class WChatListActivity extends AppCompatActivity {
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
             RecyclerViewLoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(listWeChats);
-
             if (state == RecyclerViewLoadingFooter.State.Loading) {
-                LogUtils.e("the state is Loading, just wait..");
                 return;
             }
 

@@ -54,17 +54,18 @@ private void initView() {
         mDatas = new ArrayList<>();
 
         WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
-        HeaderAndFooterRecyclerViewAdapter  recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
+        recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
         listWeChats.setLayoutManager(new LinearLayoutManager(this));
+
         listWeChats.addItemDecoration(
                 new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
                         .color(Color.parseColor("#00c7c0"))
                         .sizeResId(R.dimen.list_divider_height)
                         .showLastDivider()
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .build(false));
+                        .build());
 
         listWeChats.addOnScrollListener(mOnScrollListener);
     }
@@ -88,16 +89,18 @@ private void initView() {
         listWeChats.setAdapter(recyclerViewAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
+        gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup(listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
         listWeChats.setLayoutManager(gridLayoutManager);
 
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
-//        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00c7c0"));
 
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
                 .setH_spacing(50)
                 .setV_spacing(50)
-                .setmDivider(mDivider)
+//                .setmDivider(mDivider)
+//                .setmDivider(colorDrawable)
+                .setDividerColor(Color.parseColor("#00c7c0"))
                 .build();
 
         listWeChats.addItemDecoration(itemDecoration);
@@ -130,10 +133,12 @@ private void initView() {
 //                        .color(Color.parseColor("#FF0000"))
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .build(true));
+                        .hasHeader()
+                        .build());
 
         listWeChats.addOnScrollListener(mOnScrollListener);
 
+        // 如果你要添加HeaderView，则必须使用HeaderAndFooterRecyclerViewAdapter
         RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
     }
  ``` 
@@ -153,10 +158,9 @@ private void initView() {
         HeaderAndFooterRecyclerViewAdapter  recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup((HeaderAndFooterRecyclerViewAdapter) listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
-        listWeChats.setLayoutManager(gridLayoutManager);
-
+         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+         gridLayoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup(listWeChats.getAdapter(), gridLayoutManager.getSpanCount()));
+         listWeChats.setLayoutManager(gridLayoutManager);
 
         Drawable mDivider = getResources().getDrawable(R.drawable.list_divider);
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#F0C7C0"));

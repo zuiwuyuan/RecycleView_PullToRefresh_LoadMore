@@ -174,6 +174,7 @@ public class WChatListActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
+
                 int pos = (int) v.getTag();
 
                 Toast.makeText(WChatListActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();

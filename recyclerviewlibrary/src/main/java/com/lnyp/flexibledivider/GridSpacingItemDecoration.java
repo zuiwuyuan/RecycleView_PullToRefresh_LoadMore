@@ -32,8 +32,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         super.onDraw(c, parent, state);
 
-//        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
-
         RecyclerView.Adapter adapter = parent.getAdapter();
 
         HeaderAndFooterRecyclerViewAdapter mAdapter = null;
@@ -98,7 +96,6 @@ public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
         int position = parent.getChildAdapterPosition(view);
 
-//        HeaderAndFooterRecyclerViewAdapter mAdapter = (HeaderAndFooterRecyclerViewAdapter) parent.getAdapter();
         RecyclerView.Adapter adapter = parent.getAdapter();
 
         HeaderAndFooterRecyclerViewAdapter mAdapter = null;

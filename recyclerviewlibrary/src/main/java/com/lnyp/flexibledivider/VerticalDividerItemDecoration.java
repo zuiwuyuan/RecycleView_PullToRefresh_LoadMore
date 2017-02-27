@@ -17,13 +17,14 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
 
     private MarginProvider mMarginProvider;
 
-    private static boolean hasHeader;
+    private boolean hasHeader;
 
-    protected VerticalDividerItemDecoration(Builder builder) {
+    protected VerticalDividerItemDecoration(Builder builder, boolean hasHeader) {
         super(builder);
         mMarginProvider = builder.mMarginProvider;
-//
+        this.hasHeader = hasHeader;
     }
+
 
     @Override
     protected Rect getDividerBound(int position, RecyclerView parent, View child) {
@@ -167,6 +168,8 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
             }
         };
 
+        private boolean hasHeader = false;
+
         public Builder(Context context) {
             super(context);
         }
@@ -210,7 +213,7 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
 
         public VerticalDividerItemDecoration build() {
             checkBuilderParams();
-            return new VerticalDividerItemDecoration(this);
+            return new VerticalDividerItemDecoration(this, hasHeader);
         }
     }
 }

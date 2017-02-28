@@ -133,7 +133,7 @@ private void initView() {
 //                        .color(Color.parseColor("#FF0000"))
                         .sizeResId(R.dimen.list_divider_height)
                         .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .hasHeader()
+                        .hasHeader()// 如果你为RecycleyView添加了headerview，则一定要加上这句
                         .build());
 
         listWeChats.addOnScrollListener(mOnScrollListener);
@@ -166,7 +166,7 @@ private void initView() {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#F0C7C0"));
 
         GridSpacingItemDecoration itemDecoration = new GridSpacingItemDecoration.Builder(this, gridLayoutManager.getSpanCount())
-                .hasHeader()
+                .hasHeader() // 如果你为RecycleyView添加了headerview，则一定要加上这句
                 .setH_spacing(50)
                 .setV_spacing(50)
 //                .setDividerColor(Color.parseColor("#008E00"))

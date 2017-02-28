@@ -25,7 +25,6 @@ public class VerticalDividerItemDecoration extends FlexibleDividerDecoration {
         this.hasHeader = hasHeader;
     }
 
-
     @Override
     protected Rect getDividerBound(int position, RecyclerView parent, View child) {
 

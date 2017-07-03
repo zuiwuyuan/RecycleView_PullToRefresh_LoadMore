@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
 
     <Button
@@ -10,27 +10,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="垂直列表ListView" />
+        android:text="垂直列表ListView"/>
 
     <Button
         android:id="@+id/btnGridView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="网络列表GridView" />
+        android:text="网络列表GridView"/>
+
+    <Button
+        android:id="@+id/btnStaggeredView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="瀑布流列表StaggeredView"/>
 
     <Button
         android:id="@+id/btnAddHeaderFooter1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="添加Header和Footer的List" />
+        android:layout_marginTop="50dp"
+        android:text="添加Header和Footer的List"/>
 
     <Button
         android:id="@+id/btnAddHeaderFooter2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="添加Header和Footer的Grid" />
+        android:text="添加Header和Footer的Grid"/>
+
+    <Button
+        android:id="@+id/btnAddHeaderFooter3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="添加Header和Footer的Grid"/>
 
 </LinearLayout>

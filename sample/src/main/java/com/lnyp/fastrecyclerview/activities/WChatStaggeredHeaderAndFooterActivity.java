@@ -2,32 +2,44 @@ package com.lnyp.fastrecyclerview.activities;
 
 import android.app.ProgressDialog;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.lidroid.xutils.util.LogUtils;
 import com.lnyp.fastrecyclerview.R;
 import com.lnyp.fastrecyclerview.adapter.WeChatListAdapter;
+import com.lnyp.fastrecyclerview.adapter.WeChatStaggeredAdapter;
 import com.lnyp.fastrecyclerview.bean.WeChatModel;
 import com.lnyp.fastrecyclerview.http.HttpUtil;
 import com.lnyp.fastrecyclerview.http.IOAuthCallBack;
 import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
-import com.lnyp.flexibledivider.HorizontalDividerItemDecoration;
+import com.lnyp.fastrecyclerview.weight.SampleHeader;
+import com.lnyp.flexibledivider.GridSpacingItemDecoration;
+import com.lnyp.flexibledivider.SpacesItemDecoration;
 import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
 import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.HeaderSpanSizeLookup;
 import com.lnyp.recyclerview.RecyclerViewLoadingFooter;
 import com.lnyp.recyclerview.RecyclerViewStateUtils;
+import com.lnyp.recyclerview.RecyclerViewUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WChatListActivity extends AppCompatActivity {
+/**
+ * 带有header和footer的瀑布流recyclerview
+ */
+public class WChatStaggeredHeaderAndFooterActivity extends AppCompatActivity {
 
     private static final String URL = "http://v.juhe.cn/weixin/query";
 
@@ -54,7 +66,6 @@ public class WChatListActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
-
         qrrDataFromServer();
     }
 
@@ -64,21 +75,20 @@ public class WChatListActivity extends AppCompatActivity {
 
         mDatas = new ArrayList<>();
 
-        WeChatListAdapter weChatListAdapter = new WeChatListAdapter(this, mDatas, onClickListener);
+        WeChatStaggeredAdapter weChatListAdapter = new WeChatStaggeredAdapter(this, mDatas, onClickListener);
+
+        // 必须将Adapter再次封装
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
-        listWeChats.setLayoutManager(new LinearLayoutManager(this));
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        listWeChats.setLayoutManager(layoutManager);
 
-        listWeChats.addItemDecoration(
-                new HorizontalDividerItemDecoration.Builder(WChatListActivity.this)
-                        .color(Color.parseColor("#00c7c0"))
-                        .sizeResId(R.dimen.list_divider_height)
-                        .showLastDivider()
-                        .marginResId(R.dimen.list_divider_left_margin, R.dimen.list_divider_right_margin)
-                        .build());
+        listWeChats.addItemDecoration(new SpacesItemDecoration(20));
 
         listWeChats.addOnScrollListener(mOnScrollListener);
+
+        RecyclerViewUtils.setHeaderView(listWeChats, new SampleHeader(this));
 
     }
 
@@ -99,7 +109,7 @@ public class WChatListActivity extends AppCompatActivity {
                         RecyclerViewStateUtils.setFooterViewState(listWeChats, RecyclerViewLoadingFooter.State.Normal);
                         break;
                     case 400:
-                        RecyclerViewStateUtils.setFooterViewState(WChatListActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.NetWorkError, mFooterClick);
+                        RecyclerViewStateUtils.setFooterViewState(WChatStaggeredHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.NetWorkError, mFooterClick);
                         break;
                 }
 
@@ -148,16 +158,18 @@ public class WChatListActivity extends AppCompatActivity {
         public void onLoadNextPage(View view) {
             super.onLoadNextPage(view);
             RecyclerViewLoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(listWeChats);
+
             if (state == RecyclerViewLoadingFooter.State.Loading) {
+                LogUtils.e("the state is Loading, just wait..");
                 return;
             }
 
             if (hasMore) {
-                RecyclerViewStateUtils.setFooterViewState(WChatListActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatStaggeredHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
                 qrrDataFromServer();
 
             } else {
-                RecyclerViewStateUtils.setFooterViewState(WChatListActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.TheEnd, null);
+                RecyclerViewStateUtils.setFooterViewState(WChatStaggeredHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.TheEnd, null);
             }
         }
     };
@@ -165,7 +177,7 @@ public class WChatListActivity extends AppCompatActivity {
     private View.OnClickListener mFooterClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            RecyclerViewStateUtils.setFooterViewState(WChatListActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
+            RecyclerViewStateUtils.setFooterViewState(WChatStaggeredHeaderAndFooterActivity.this, listWeChats, PAGE_SIXE, RecyclerViewLoadingFooter.State.Loading, null);
             qrrDataFromServer();
         }
     };
@@ -174,10 +186,9 @@ public class WChatListActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             try {
-
                 int pos = (int) v.getTag();
 
-                Toast.makeText(WChatListActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WChatStaggeredHeaderAndFooterActivity.this, "pos : " + pos, Toast.LENGTH_SHORT).show();
 
             } catch (Exception e) {
                 e.printStackTrace();

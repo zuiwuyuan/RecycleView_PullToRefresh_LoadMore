@@ -57,7 +57,7 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wchat_grid_header_and_footer);
+        setContentView(R.layout.activity_wchats);
 
         initView();
 

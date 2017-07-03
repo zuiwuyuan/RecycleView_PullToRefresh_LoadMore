@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnAddHeaderFooter2;
 
 
+    private Button btnStaggeredView;
+
+    private Button btnAddHeaderFooter3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btnGridView = (Button) findViewById(R.id.btnGridView);
         this.btnAddHeaderFooter1 = (Button) findViewById(R.id.btnAddHeaderFooter1);
         this.btnAddHeaderFooter2 = (Button) findViewById(R.id.btnAddHeaderFooter2);
+
+        this.btnStaggeredView = (Button) findViewById(R.id.btnStaggeredView);
+        this.btnAddHeaderFooter3 = (Button) findViewById(R.id.btnAddHeaderFooter3);
+
     }
 
     private void initListener() {
@@ -42,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         this.btnGridView.setOnClickListener(this);
         this.btnAddHeaderFooter1.setOnClickListener(this);
         this.btnAddHeaderFooter2.setOnClickListener(this);
+        this.btnStaggeredView.setOnClickListener(this);
+        this.btnAddHeaderFooter3.setOnClickListener(this);
     }
 
     @Override
@@ -53,11 +63,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnGridView:
                 startActivity(new Intent(this, WChatGridActivity.class));
                 break;
+            case R.id.btnStaggeredView:
+                startActivity(new Intent(this, WChatStaggeredActivity.class));
+                break;
             case R.id.btnAddHeaderFooter1:
                 startActivity(new Intent(this, WChatListHeaderAndFooterActivity.class));
                 break;
             case R.id.btnAddHeaderFooter2:
                 startActivity(new Intent(this, WChatGridHeaderAndFooterActivity.class));
+                break;
+            case R.id.btnAddHeaderFooter3:
+                startActivity(new Intent(this, WChatStaggeredHeaderAndFooterActivity.class));
                 break;
         }
     }

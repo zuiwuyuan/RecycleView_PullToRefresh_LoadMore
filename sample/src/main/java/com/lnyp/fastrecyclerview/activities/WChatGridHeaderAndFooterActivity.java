@@ -89,7 +89,7 @@ public class WChatGridHeaderAndFooterActivity extends AppCompatActivity {
                 .hasHeader()
                 .setH_spacing(50)
                 .setV_spacing(50)
-//                .setDividerColor(Color.parseColor("#008E00"))
+//                .setDividerColor(Color.parseColor("#FFFFFF"))
                 .setmDivider(colorDrawable)
 //                .setmDivider(mDivider)
                 .build();

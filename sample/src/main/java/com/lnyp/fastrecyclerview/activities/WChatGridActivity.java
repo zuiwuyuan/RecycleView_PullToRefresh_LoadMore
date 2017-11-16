@@ -87,7 +87,7 @@ public class WChatGridActivity extends AppCompatActivity {
                 .setV_spacing(50)
 //                .setmDivider(mDivider)
 //                .setmDivider(colorDrawable)
-                .setDividerColor(Color.parseColor("#00c7c0"))
+                .setDividerColor(Color.parseColor("#FFFFFF"))
                 .build();
 
         listWeChats.addItemDecoration(itemDecoration);
@@ -105,6 +105,7 @@ public class WChatGridActivity extends AppCompatActivity {
         HttpUtil.sendRequest(this, HttpRequest.HttpMethod.GET, URL, requestParams, new IOAuthCallBack() {
             @Override
             public void getIOAuthCallBack(int code, String result) {
+                LogUtils.e("result : " + result);
                 switch (code) {
                     case 200:
                         dealData(result);
@@ -137,6 +138,8 @@ public class WChatGridActivity extends AppCompatActivity {
                 pno = resultEntity.getPno() + 1;
 
                 List<WeChatModel> weChatModels = respWeChats.getResult().getList();
+
+                LogUtils.e("*******************************************");
 
                 if (weChatModels != null) {
                     mDatas.addAll(weChatModels);

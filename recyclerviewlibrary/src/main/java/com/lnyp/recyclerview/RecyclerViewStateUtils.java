@@ -6,10 +6,26 @@ import android.view.View;
 
 /**
  * 分页展示数据时，RecyclerView的FooterView State 操作工具类
- *
+ * <p>
  * RecyclerView一共有几种State：Normal/Loading/Error/TheEnd
  */
 public class RecyclerViewStateUtils {
+
+    /**
+     * 设置当前RecyclerView.FooterView的状态
+     *
+     * @param recyclerView
+     * @param state
+     */
+    public static void setFooterViewState(RecyclerView recyclerView, RecyclerViewLoadingFooter.State state) {
+        RecyclerView.Adapter outerAdapter = recyclerView.getAdapter();
+        if (outerAdapter != null && outerAdapter instanceof HeaderAndFooterRecyclerViewAdapter) {
+            if (((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterViewsCount() > 0) {
+                RecyclerViewLoadingFooter footerView = (RecyclerViewLoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
+                footerView.setState(state);
+            }
+        }
+    }
 
     /**
      * 设置headerAndFooterAdapter的FooterView State
@@ -81,19 +97,4 @@ public class RecyclerViewStateUtils {
         return RecyclerViewLoadingFooter.State.Normal;
     }
 
-    /**
-     * 设置当前RecyclerView.FooterView的状态
-     *
-     * @param recyclerView
-     * @param state
-     */
-    public static void setFooterViewState(RecyclerView recyclerView, RecyclerViewLoadingFooter.State state) {
-        RecyclerView.Adapter outerAdapter = recyclerView.getAdapter();
-        if (outerAdapter != null && outerAdapter instanceof HeaderAndFooterRecyclerViewAdapter) {
-            if (((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterViewsCount() > 0) {
-                RecyclerViewLoadingFooter footerView = (RecyclerViewLoadingFooter) ((HeaderAndFooterRecyclerViewAdapter) outerAdapter).getFooterView();
-                footerView.setState(state);
-            }
-        }
-    }
 }

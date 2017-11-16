@@ -35,6 +35,7 @@ public class RecyclerViewUtils {
      *
      * @param recyclerView
      * @param view
+     *
      */
     public static void setFooterView(RecyclerView recyclerView, View view) {
         RecyclerView.Adapter outerAdapter = recyclerView.getAdapter();

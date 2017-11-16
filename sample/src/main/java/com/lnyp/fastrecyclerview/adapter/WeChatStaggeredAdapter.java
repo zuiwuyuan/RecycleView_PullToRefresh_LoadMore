@@ -1,7 +1,9 @@
 package com.lnyp.fastrecyclerview.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.lnyp.fastrecyclerview.R;
 import com.lnyp.fastrecyclerview.bean.WeChatModel;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * 微信精选列表
@@ -25,9 +28,11 @@ public class WeChatStaggeredAdapter extends RecyclerView.Adapter {
 
     private View.OnClickListener wechatItemClick;
 
-    private Context mContext;
+    private Activity mContext;
 
-    public WeChatStaggeredAdapter(Context context, List<WeChatModel> weChatModels, View.OnClickListener wechatItemClick) {
+    private int width;
+
+    public WeChatStaggeredAdapter(Activity context, List<WeChatModel> weChatModels, View.OnClickListener wechatItemClick) {
 
         this.mContext = context;
 
@@ -36,6 +41,11 @@ public class WeChatStaggeredAdapter extends RecyclerView.Adapter {
         this.weChatModels = weChatModels;
 
         this.wechatItemClick = wechatItemClick;
+
+        DisplayMetrics dm = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        width = dm.widthPixels / 2;
     }
 
     @Override
@@ -54,6 +64,17 @@ public class WeChatStaggeredAdapter extends RecyclerView.Adapter {
 
             try {
 
+
+                ViewGroup.LayoutParams lp = viewHolder.imgWeChat.getLayoutParams();
+
+                lp.width = width;
+                double rate = new Random().nextDouble();
+                if (rate < 0.42) {
+                    rate = rate + 1;
+                }
+                lp.height = (int) (width * rate);
+
+                viewHolder.imgWeChat.setLayoutParams(lp);
                 Glide.with(mContext).load(weChatModel.getFirstImg()).placeholder(R.drawable.empty_default_img).into(viewHolder.imgWeChat);
 
                 viewHolder.textTitle.setText(weChatModel.getTitle());

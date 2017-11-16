@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnAddHeaderFooter3:
                 startActivity(new Intent(this, WChatStaggeredHeaderAndFooterActivity.class));
                 break;
+            default:
+
+                break;
         }
     }
 }

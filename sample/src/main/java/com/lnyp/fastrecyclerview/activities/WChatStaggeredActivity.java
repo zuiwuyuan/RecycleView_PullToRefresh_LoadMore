@@ -20,7 +20,9 @@ import com.lnyp.fastrecyclerview.resp.RespWeChats;
 import com.lnyp.fastrecyclerview.util.GsonUtils;
 import com.lnyp.flexibledivider.SpacesItemDecoration;
 import com.lnyp.recyclerview.EndlessRecyclerOnScrollListener;
+import com.lnyp.recyclerview.ExStaggeredGridLayoutManager;
 import com.lnyp.recyclerview.HeaderAndFooterRecyclerViewAdapter;
+import com.lnyp.recyclerview.HeaderSpanSizeLookup;
 import com.lnyp.recyclerview.RecyclerViewLoadingFooter;
 import com.lnyp.recyclerview.RecyclerViewStateUtils;
 
@@ -72,7 +74,8 @@ public class WChatStaggeredActivity extends AppCompatActivity {
         recyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(weChatListAdapter);
         listWeChats.setAdapter(recyclerViewAdapter);
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        ExStaggeredGridLayoutManager layoutManager = new ExStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setSpanSizeLookup(new HeaderSpanSizeLookup(listWeChats.getAdapter(), layoutManager.getSpanCount()));
         listWeChats.setLayoutManager(layoutManager);
 
         listWeChats.addItemDecoration(new SpacesItemDecoration(20));
